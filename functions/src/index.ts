@@ -1,8 +1,9 @@
 import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
 import createHmac from 'create-hmac';
 
-// Start writing Firebase Functions
-// https://firebase.google.com/docs/functions/typescript
+admin.initializeApp()
+
 
 interface TeamsResponse {
   type: string;
@@ -60,11 +61,17 @@ export const bellWebhook = functions.https.onRequest((request, response) => {
   }
 
   const body: TeamsRequest = request.body;
+  admin.database().ref().child('messages').push().set(body).then(() => {
+    functions.logger.info('Message saved.');
+  }).catch((err) => {
+    functions.logger.error(err);
+  });
+
   functions.logger.info(body);
 
   const msg: TeamsResponse = {
     type: 'message',
-    text: 'You said: ' + body.text,
+    text: '受け付けました [Firebase]',
   };
 
   response.json(msg);
