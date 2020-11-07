@@ -8,9 +8,8 @@ export const bellWebhook = functions.https.onRequest((request, response) => {
   const bellSecretBase64 = functions.config().bell.secret;
   const bellSecretDecoded = Buffer.from(bellSecretBase64, 'base64');
   const auth = request.get('Authorization');
-  const body = request.rawBody.toString('utf-8');
+  const body = request.rawBody.toString();
 
-  // TODO: fix HMAC
   const hmacBuf = createHmac('sha256', bellSecretDecoded);
   hmacBuf.update(body);
 
