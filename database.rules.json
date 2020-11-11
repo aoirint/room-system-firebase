@@ -1,0 +1,12 @@
+{
+  "rules": {
+    ".read": "data.child('users').child(auth.uid).child('readable').val() == true",
+    ".write": "false",
+    "sensor": {
+      "environment": {
+        ".indexOn": [ "timestamp" ],
+      }
+    }
+  }
+}
+
