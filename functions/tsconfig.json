@@ -8,7 +8,10 @@
     "strict": true,
     "target": "es2017",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "ESNext.AsyncIterable"
+    ]
   },
   "compileOnSave": true,
   "include": [
