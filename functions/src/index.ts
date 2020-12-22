@@ -69,9 +69,10 @@ export const bellWebhook = functions.https.onRequest((request, response) => {
 
   functions.logger.info(body);
 
+  // TODO: クライアントの死活管理
   const msg: TeamsResponse = {
     type: 'message',
-    text: '受け付けました [Firebase]',
+    text: '受け付けました（呼び鈴の状態：未チェック）',
   };
 
   response.json(msg);
